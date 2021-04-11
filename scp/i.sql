@@ -23,7 +23,7 @@ def _i_host="NA"
 def _i_user="&_user"
 def _i_conn="&_connect_identifier"
 
-col i_username head USERNAME for a20
+col i_username head USERNAME for a20 new_value _user 
 col i_sid head SID for a5 new_value mysid
 col i_serial head "SERIAL#" for a8 new_value _i_serial
 col i_cpid head CPID for a15 new_value _i_cpid
@@ -89,5 +89,5 @@ def mycpid=&_i_cpid
 
 -- undef _i_spid _i_inst _i_host _i_user _i_conn _i_cpid
 
-set sqlprompt "&_i_inst'@'_user> "
+set sqlprompt "&_i_inst@&_user> "
 set termout on
