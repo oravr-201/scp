@@ -89,3 +89,5 @@ def mycpid=&_i_cpid
 
 -- undef _i_spid _i_inst _i_host _i_user _i_conn _i_cpid
 
+set sqlprompt "&_i_inst'@'_user> "
+set termout on
