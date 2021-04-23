@@ -1,4 +1,4 @@
-###################################################
+####################################################
 # This script show the patch details from 11g to 19c
 # Created by www.oravr.in
 # git : https://github.com/oravr-201/scp.git
