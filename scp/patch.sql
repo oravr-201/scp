@@ -15,20 +15,37 @@ echo ""
 VAL3=$(${ORACLE_HOME}/bin/sqlplus -S "/ as sysdba" <<EOF
 set pages 0 feedback off;
 prompt
-Select  substr(substr(banner, instr(banner, 'Release ')+8),1, instr(substr(banner, instr(banner, 'Release ')+8),'.')-1) my from v\$version;
+Select  substr(substr(banner, instr(banner, 'Release ')+8),1, instr(substr(banner, instr(banner, 'Release ')+8),'.')-1) my from v\$version  where rownum=1;
 exit;
 EOF
 )
 
-if [ $VAL3 == 11 ]
+
+if [ $VAL3 == 10 ]
 then
-${ORACLE_HOME}/bin/sqlplus -S "/ as sysdba" <<EOF
-set pages 0 feedback off;
+echo "exit"
+
+elif [ $VAL3 == 11 ]
+then
+${ORACLE_HOME}/bin/sqlplus -S "/ as sysdba" <<EOF > /tmp/patch.log
 prompt
-@login.sql
+@@init.sql
+@@i.sql
+
+
+set feedback off LINESIZE 500  PAGESIZE 1000 SERVEROUT ON LONG 2000000;
+col action_time FOR a28
+col version FOR a10
+col comments FOR a35
+col action FOR a25
+col namespace FOR a12
+
+alter session set "_exclude_seed_cdb_view"=FALSE;
 SELECT * FROM sys.registry\$history order by action_time DESC;
 exit;
 EOF
+
+
 elif [ $VAL3 == 12 ]
 then
 
@@ -49,6 +66,7 @@ COLUMN version FORMAT A10
 SELECT TO_CHAR(action_time, 'YYYY-MM-DD') AS action_time, action, status, description, version, patch_id, bundle_series FROM   sys.dba_registry_sqlpatch ORDER by action_time;
 exit;
 EOF
+
 
 elif [ $VAL3 == 18 ]
 then
@@ -102,4 +120,5 @@ EOF
     echo ""
     echo -e "                                                     \e[32m!!--------------- Thank you ----------------!!\e[0m"
     echo ""
+
 
