@@ -1,18 +1,3 @@
--- Copyright 2018 Tanel Poder. All rights reserved. More info at http://tanelpoder.com
--- Licensed under the Apache License, Version 2.0. See LICENSE.txt for terms & conditions.
-
---------------------------------------------------------------------------------
---
--- Name:        init.sql
--- Purpose:     Initializes sqlplus variables for 156 character terminal width and other settings.
---
--- Author:      Tanel Poder
--- Copyright:   (c) http://www.tanelpoder.com
--- 
--- Other:       You need to comment out the right variable definitions for your client platform below.
---              Assumes SQLPATH variable set to point to TPT script directory.
---
---------------------------------------------------------------------------------
 
 -- this must be here to avoid logon problems when SQLPATH env variable is unset
 def SQLPATH=""

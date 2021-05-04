@@ -13,7 +13,7 @@ SET TERMOUT ON;
 
 PROMPT 
 PROMPT +------------------------------------------------------------------------+
-PROMPT | Report   : Database size details                                       |
+PROMPT | Report   : Database size details  ( by www.oravr.in )                  |
 PROMPT | Instance : &instance_name on &i_host_name   
 PROMPT +------------------------------------------------------------------------+
 

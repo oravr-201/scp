@@ -1,17 +1,3 @@
--- Copyright 2018 Tanel Poder. All rights reserved. More info at https://blog.tanelpoder.com
--- Licensed under the Apache License, Version 2.0. See LICENSE.txt for terms and conditions.
-
---------------------------------------------------------------------------------
---
--- Name:        i.sql
--- Purpose:     the Who am I script (also sets terminal title)
---
--- Author:      Tanel Poder
--- Copyright:   (c) http://blog.tanelpoder.com
--- 
--- Other:       Some settings client OS specific (search for title)
---
---------------------------------------------------------------------------------
 
 def   mysid="NA"
 def _i_spid="NA"
