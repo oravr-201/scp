@@ -65,12 +65,12 @@ IS
     k_host              CONSTANT VARCHAR2 (100) := 'smtp.office365.com';
     k_port              CONSTANT INTEGER := 587;
     k_wallet_path       CONSTANT VARCHAR2 (100) := 'file:/opt/oracle/dcs/commonstore/wallets/tde/WPDEVDB1_dxb1fb';
-    k_wallet_password   CONSTANT VARCHAR2 (100) := 'Ora_adm1N#T3aM';
+    k_wallet_password   CONSTANT VARCHAR2 (100) := 'walletpass';
     k_domain            CONSTANT VARCHAR2 (100) := 'outlook.com';
-    k_username          CONSTANT VARCHAR2 (100) := 'vishal.p@phoenixdigitaltech.net';
-    k_password          CONSTANT VARCHAR2 (100) := 'ispl_2019';
-    k_sender            CONSTANT VARCHAR2 (100) := 'vishal.p@phoenixdigitaltech.net';
---    k_recipient         CONSTANT VARCHAR2 (1000) := 'vishal.p@phoenixdigitaltech.net';
+    k_username          CONSTANT VARCHAR2 (100) := 'vishal.p@oravr.in';
+    k_password          CONSTANT VARCHAR2 (100) := 'password';
+    k_sender            CONSTANT VARCHAR2 (100) := 'vishal.p@poravr.int';
+--    k_recipient         CONSTANT VARCHAR2 (1000) := 'vishal.p@oravr.in';
 --    k_subject           CONSTANT VARCHAR2 (100) := 'Test TLS mail from DEV Poynt DB by Vishal ';
 --    k_body              CONSTANT VARCHAR2 (100) := 'Please reply back if you recived Email ';
 
@@ -229,5 +229,5 @@ END vb3;
 
 -- Exicution :
 
-execute c##vishalbh.MAIL_VB('vishal.p@phoenixdigitaltech.net', 'Email from Poynt DEV db', 'Sent using UTL_SMTP');
+execute c##vishalbh.MAIL_VB('vishal.p@oravr.in', 'Email from DEV db', 'Sent using UTL_SMTP');
 
