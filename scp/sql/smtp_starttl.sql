@@ -57,7 +57,7 @@ orapki wallet display -wallet /opt/oracle/dcs/commonstore/wallets/tde/PDWPDB1_dx
 -- 3. Procedure to send Email
 
 
-CREATE OR REPLACE PROCEDURE c##vishalbh.vb3 (k_recipient    VARCHAR2,
+CREATE OR REPLACE PROCEDURE c##vishalbh.sendmail (k_recipient    VARCHAR2,
                                       k_subject      VARCHAR2,
                                       k_body     VARCHAR2
                                       )
@@ -222,12 +222,12 @@ EXCEPTION
         raise_application_error (
             -20000,
             'Failed to send mail due to the following error: ' || SQLERRM);
-END vb3;
+END sendmail;
 /
 
 
 
 -- Exicution :
 
-execute c##vishalbh.MAIL_VB('vishal.p@oravr.in', 'Email from DEV db', 'Sent using UTL_SMTP');
+execute c##vishalbh.sendmail('vishal.p@oravr.in', 'Email from DEV db', 'Sent using UTL_SMTP');
 
