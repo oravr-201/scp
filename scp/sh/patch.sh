@@ -102,8 +102,8 @@ COLUMN action_time FORMAT A20
 COLUMN action FORMAT A10
 COLUMN status FORMAT A10
 COLUMN description FORMAT A90
-COLUMN source_version FORMAT A10
-COLUMN target_version FORMAT A10
+COLUMN source_version FORMAT A12
+COLUMN target_version FORMAT A12
 
 
 alter session set "_exclude_seed_cdb_view"=FALSE;
