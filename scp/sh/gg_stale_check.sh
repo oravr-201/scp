@@ -45,11 +45,13 @@ done
 while IFS= read -r line1 && IFS= read -r line2 <&3; do
 if [[ $line1 == $line2  ]]
 then
-  echo $"Status ok $line1"
+        echo "$line1                   $line2" > /tmp/vb_s.log
 else
-echo "$line1                   $line2" > /tmp/vb_s.log
+echo $"Status ok $line1"
 fi
 done < /tmp/vbstatus_1  3< /tmp/vbstatus_2
+
+
 
 
 
