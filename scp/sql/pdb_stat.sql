@@ -1,11 +1,10 @@
 /* Formatted on 4/25/21 12:09:00 PM (QP5 v5.326) */
 
 prompt 
+prompt                             
 prompt 
-prompt                                !!-----Welcome to OraVR (www.oravr.in)------!!                                
-prompt 
-@@init.sql
-@@i.sql
+--@@init.sql
+--@@i.sql
 set feedback off LINESIZE 500  PAGESIZE 1000 SERVEROUT ON LONG 2000000; 
 COLUMN NAME FORMAT A15
 COLUMN "Database Uptime" FORMAT A30
@@ -43,7 +42,6 @@ SELECT c.con_id,
   FROM v$containers c;
 
 prompt 
-prompt  
-prompt                                !!-----Welcome to OraVR (www.oravr.in)------!!                                
+prompt                                
 prompt 
 prompt 

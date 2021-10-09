@@ -7,5 +7,8 @@
 -- also sets command prompt window/xterm title
 @i.sql
 
+@ii.sql
+
 -- you can put your own login scripts here
 
+@Alias.sql

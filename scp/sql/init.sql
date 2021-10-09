@@ -1,4 +1,3 @@
-
 -- this must be here to avoid logon problems when SQLPATH env variable is unset
 def SQLPATH=""
 
@@ -14,7 +13,7 @@ def SQLPATH=$SQLPATH -- (Unix/Mac OSX)
 def _start=open -- MacOS
 
 def _delete="rm -f" -- Unix/MacOSX
--- def _delete="del" -- Windows
+--def _delete="del" -- Windows
 
 def _tpt_tempdir=&SQLPATH/tmp
 
@@ -185,4 +184,13 @@ set editfile afiedit.sql
 -- reset termout back to normal
 
   set termout on
+
+
+
+
+
+
+
+
+SET SQLFORMAT ansiconsole
 

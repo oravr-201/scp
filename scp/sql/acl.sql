@@ -42,34 +42,18 @@ COLUMN PDB         FORMAT a10
 
 SELECT ANY_PATH
 FROM RESOURCE_VIEW
---WHERE ANY_PATH LIKE '/sys/acls/dba%'
+WHERE ANY_PATH LIKE '%&1%'
 ;
 
-PROMPT
-PROMPT +------------------------------------------------------------------------+
-PROMPT | Report   : Acl Detail By www.oravr.in                                  |
-PROMPT | Instance : &instance_name on &i_host_name
-PROMPT +------------------------------------------------------------------------+
 
 
-SELECT c.con_id ,c.name PDB,a.host, a.lower_port, a.upper_port, a.acl
-FROM   cdb_network_acls a ,v$containers c
-where 
-       a.con_id=c.con_id
-       AND upper(c.name) like upper('%&1%') order by 1;
+SELECT c.con_id ,c.name PDB,a.host, a.lower_port, a.upper_port, a.acl FROM   cdb_network_acls a ,v$containers c where        a.con_id=c.con_id
+        AND upper(c.name) like upper('%&2%') order by 1;
 
 
 
-SELECT c.con_id ,c.name PDB,a.acl,
-       a.principal,
-       a.privilege,
-       a.is_grant,
-       TO_CHAR(a.start_date, 'DD-MON-YYYY') AS start_date,
-       TO_CHAR(a.end_date, 'DD-MON-YYYY') AS end_date
-FROM   cdb_network_acl_privileges a,v$containers c
-where 
-       a.con_id=c.con_id
-       AND upper(c.name) like upper('%&1%')
-	order by 1;
 
+
+
+SELECT c.con_id ,c.name PDB,a.acl,        a.principal,        a.privilege,        a.is_grant,        TO_CHAR(a.start_date, 'DD-MON-YYYY') AS start_date,        TO_CHAR(a.end_date, 'DD-MON-YYYY') AS end_date FROM   cdb_network_acl_privileges a,v$containers c where        a.con_id=c.con_id AND upper(c.name) like upper('%&2%') 	order by 1; 
 

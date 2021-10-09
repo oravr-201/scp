@@ -1,3 +1,5 @@
+prompt
+prompt
 
 def   mysid="NA"
 def _i_spid="NA"
@@ -23,7 +25,7 @@ col i_startup_day head STARTED for a8
 col _i_user noprint new_value _i_user
 col _i_conn noprint new_value _i_conn
 col i_myoraver noprint new_value myoraver
-col i_inst head I# FOR 99
+-- col i_inst head I# FOR 99
 col i_db_role head DB_ROLE FOR A25
 
 select 
@@ -64,7 +66,7 @@ and
 --host doskey /exename=sqlplus.exe desc=set lines 80 sqlprompt ""$Tdescribe $*$Tset lines 299 sqlprompt "SQL> "
 
 -- short xterm title
-host echo -ne '\033]0;&_i_user@&_i_inst &mysid[&_i_spid]\007'
+-- host echo -ne '\033]0;&_i_user@&_i_inst &mysid[&_i_spid]\007'
 -- long xterm title
 --host echo -ne "\033]0;host=&_i_host inst=&_i_inst sid=&mysid ser#=&_i_serial spid=&_i_spid cpid=&_i_cpid opid=&_i_opid\007"
 
@@ -75,18 +77,5 @@ def mycpid=&_i_cpid
 
 -- undef _i_spid _i_inst _i_host _i_user _i_conn _i_cpid
 
-set sqlprompt "&_i_inst@&_user> "
-set termout on
-set termout on
-COLUMN id_plus_exp FORMAT 990 HEADING i
-COLUMN parent_id_plus_exp FORMAT 990 HEADING p
-COLUMN plan_plus_exp FORMAT a60
-COLUMN object_node_plus_exp FORMAT a8
-COLUMN other_tag_plus_exp FORMAT a29
-COLUMN other_plus_exp FORMAT a44
-col HOSTNAME for a35
-col BLOCKED for a7
-col STARTUP_TIME for a19
-select I.STATUS,I.DATABASE_STATUS DB_STATUS,D.open_mode,d.protection_mode,D.database_role,I.LOGINS,D.FLASHBACK_ON,d.log_mode,
-to_char(I.STARTUP_TIME,'DD-MON-YY HH24:MI:SS') STARTUP_TIME from gv$instance I,v$database D ;
 
+SET SQLFORMAT ansiconsole
