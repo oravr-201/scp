@@ -69,19 +69,15 @@ alias acl2 = SELECT c.con_id ,c.name PDB,a.acl,        a.principal,        a.pri
 
 alias dfc=select c.name ,a.* from ( select s.con_id ,sum(s.bytes/1024/1024/1024) "Size in GB" from cdb_segments s group by s.con_id) a ,v$containers c where a.con_id=c.con_id and upper(c.name)  LIKE UPPER (:1);
 
-alias dfca=SELECT "RESERVED_SPACE(MB)", "RESERVED_SPACE(MB)" - "FREE_SPACE(MB)" "USED_SPACE(MB)","FREE_SPACE(MB)","DATABASE SIZE(GB)" FROM( SELECT (SELECT SUM(BYTES/(1014*1024*1024)) FROM cdb_DATA_FILES) "RESERVED_SPACE(MB)", (SELECT SUM(BYTES/(1024*1024*1024)) FROM cdb_FREE_SPACE) "FREE_SPACE(MB)", (SELECT SUM(BYTES/(1024*1024*1024)) FROM cdb_SEGMENTS) "DATABASE SIZE(GB)" FROM DUAL );
-
-
-
-
-
+alias dfca=SELECT *   FROM (SELECT a.*,                a.RESERVED_SPACE_MB - b.FREE_SPACE_MB     "USED_SPACE",                b.FREE_SPACE_MB,                c.DATABASE_SIZE_GB           FROM (  SELECT c.name,                          SUM (BYTES / (1024 * 1024 * 1024))    "RESERVED_SPACE_MB"                     FROM cdb_DATA_FILES d, v$containers c                    WHERE d.con_id = c.con_id                 GROUP BY c.name) a                JOIN                (  SELECT c.name,                          SUM (BYTES / (1024 * 1024 * 1024))     "FREE_SPACE_MB"                     FROM cdb_FREE_SPACE d, v$containers c                    WHERE d.con_id = c.con_id                 GROUP BY c.name) b                    ON (a.name = b.name)                JOIN                (  SELECT c.name,                          SUM (BYTES / (1024 * 1024 * 1024))    "DATABASE_SIZE_GB"                     FROM cdb_SEGMENTS d, v$containers c                    WHERE d.con_id = c.con_id                 GROUP BY c.name) c                    ON (a.name = c.name)) where  UPPER (name) LIKE UPPER ( :1);
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+alias pdb=@pdb.sql :1;
+alias pdbc=@pdbc.sql ;
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+alias tbs_shrink= SELECT File_ID, Tablespace_name, file_name, High_Water_Mark, current_size_in_GB,     'ALTER DATABASE DATAFILE '''||file_name||''' resize '|| High_Water_Mark|| 'M;' script_reclaim FROM (     WITH v_file_info          AS (SELECT FILE_NAME, FILE_ID, BLOCK_SIZE                FROM dba_tablespaces tbs, dba_data_files df               WHERE tbs.tablespace_name = df.tablespace_name)     SELECT A.FILE_ID,            A.FILE_NAME,            A.TABLESPACE_NAME,            CEIL ( (NVL (hwm, 1) * v_file_info.block_size) / 1024 / 1024) High_Water_Mark,            CEIL (BLOCKS * v_file_info.block_size / 1024 / 1024 /2014) current_size_in_GB       FROM dba_data_files A,            v_file_info,            (  SELECT file_id, MAX (block_id + BLOCKS - 1) hwm                 FROM dba_extents             GROUP BY file_id) b      WHERE A.file_id = b.file_id(+)        AND A.file_id = v_file_info.file_id        AND UPPER (TABLESPACE_NAME) LIKE UPPER (:1) )   WHERE  High_Water_Mark <> current_size_in_GB;
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+alias user= select * from dba_users (:1);
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
